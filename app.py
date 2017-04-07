@@ -39,7 +39,7 @@ def makeWebhookResult(req):
 
     info = {'Education':'M.Sc Software Engineering'}
 
-    speech = "His educational qualification is " +  str(info[Education]) + "."
+    speech = "His educational qualification is " +  str(info['Education']) + "."
 
     print("Response:")
     print(speech)
