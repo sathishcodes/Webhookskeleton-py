@@ -29,7 +29,7 @@ def webhook():
 
 def makeWebhookResult(req):
     
-    if req.get("result").get("action") == "tell.education": 
+    # f req.get("result").get("action") == "tell.education": 
      # return {}
     
     #result = req.get("result")
