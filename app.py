@@ -7,7 +7,7 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
-from firebase import firebase
+#from firebase import firebase
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    firebase = firebase.FirebaseApplication('https://Buddy-db.firebaseio.com', authentication=None)
+ #   firebase = firebase.FirebaseApplication('https://Buddy-db.firebaseio.com', authentication=None)
     
     req = request.get_json(silent=True, force=True)
 
