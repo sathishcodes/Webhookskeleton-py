@@ -29,32 +29,30 @@ def webhook():
 
 def makeWebhookResult(req):
     
-    # if req.get("result").get("action") = "tell.education": 
-     # return {}
+     if req.get("result").get("action") = "tell.hours": 
+        result = req.get("result")
+        parameters = result.get("parameters")
+
+        timetype = parameters.get("time-type")
+        portaltype = parameters.get("portal-types")
+
+        DteTime = {'CS':'9 hours', 'PTO':'8 hours'}
+        StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
+
+        #if time-type == "DTE"
+        speech = "You should book" + str(DteTime[timetype]) + "for" + timetype  
+        #speech = "Webhook called!!"
     
-    result = req.get("result")
-    parameters = result.get("parameters")
+        print("Response:")
+        print(speech)
 
-    timetype = parameters.get("time-type")
-    portaltype = parameters.get("portal-types")
-
-    DteTime = {'CS':'9 hours', 'PTO':'8 hours'}
-    StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
-
-    #if time-type == "DTE"
-    speech = "You should book" + str(DteTime[timetype]) + "for" + timetype  
-    #speech = "Webhook called!!"
-    
-    print("Response:")
-    print(speech)
-
-    return {
-        "speech": speech,
-        "displayText": speech,
-        #"data": {},
-        # "contextOut": [],
-        "source": "apiai-onlinestore-shipping"
-    }
+        return {
+            "speech": speech,
+            "displayText": speech,
+            #"data": {},
+            # "contextOut": [],
+            "source": "apiai-onlinestore-shipping"
+        }
 
 
 if __name__ == '__main__':
