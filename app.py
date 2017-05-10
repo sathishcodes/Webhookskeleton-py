@@ -42,7 +42,7 @@ def makeWebhookResult(req):
     StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
 
     #if time-type == "DTE"
-    speech = "You should book" + str(DteTime[time-type]) + "for" + $time-type  
+    speech = "You should book" + str(DteTime[time-type]) + "for" + time-type  
 
     print("Response:")
     print(speech)
