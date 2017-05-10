@@ -7,7 +7,6 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
-#from firebase import firebase
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -15,8 +14,6 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
- #   firebase = firebase.FirebaseApplication('https://Buddy-db.firebaseio.com', authentication=None)
-    
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
@@ -32,17 +29,20 @@ def webhook():
 
 def makeWebhookResult(req):
     
-    # f req.get("result").get("action") == "tell.education": 
+    # if req.get("result").get("action") = "tell.education": 
      # return {}
     
-    #result = req.get("result")
-    #parameters = result.get("parameters")
+    result = req.get("result")
+    parameters = result.get("parameters")
 
-    #zone = parameters.get("shipping-zone")
+    time-type = parameters.get("time-type")
+    portal-type = parameters.get("portal-types")
 
-    info = {'Education':'M.Sc Software Engineering'}
+    DteTime = {'CS':'9 hours', 'PTO':'8 hours'}
+    StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
 
-    speech = "His educational qualification is " +  str(info['Education']) + "."
+    if time-type = DTE
+        speech: "You should book" DteTime(time-type) "for" $time-type  
 
     print("Response:")
     print(speech)
