@@ -32,18 +32,18 @@ def makeWebhookResult(req):
     # if req.get("result").get("action") = "tell.education": 
      # return {}
     
-    #result = req.get("result")
-    #parameters = result.get("parameters")
+    result = req.get("result")
+    parameters = result.get("parameters")
 
-    #timetype = parameters.get("time-type")
-    #portaltype = parameters.get("portal-types")
+    timetype = parameters.get("time-type")
+    portaltype = parameters.get("portal-types")
 
     DteTime = {'CS':'9 hours', 'PTO':'8 hours'}
     StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
 
     #if time-type == "DTE"
-    #speech = "You should book" + str(DteTime[timetype]) + "for" + timetype  
-    speech = "Webhook called!!"
+    speech = "You should book" + str(DteTime[timetype]) + "for" + timetype  
+    #speech = "Webhook called!!"
     
     print("Response:")
     print(speech)
