@@ -42,7 +42,7 @@ def makeWebhookResult(req):
         
         speech = "You should book" + str(DteTime[timetype]) + "for" + timetype          
             
-    elif action == "tell.minimumhours"
+    elif action == "tell.minimumhours":
         speech = "You should minimum 40 hours each week"
         
         return {
