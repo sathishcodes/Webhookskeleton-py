@@ -29,7 +29,7 @@ def webhook():
 
 def makeWebhookResult(req):
     
-     if req.get("result").get("action") = "tell.hours": 
+     if req.get("result").get("action") == "tell.hours": 
         result = req.get("result")
         parameters = result.get("parameters")
 
