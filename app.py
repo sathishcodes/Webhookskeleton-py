@@ -28,8 +28,9 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-    
-     if req.get("result").get("action") == "tell.hours": 
+    action = req.get("result").get("action"); 
+     
+    if action == "tell.hours":
         result = req.get("result")
         parameters = result.get("parameters")
 
@@ -40,10 +41,10 @@ def makeWebhookResult(req):
         #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
         
         speech = "You should book" + str(DteTime[timetype]) + "for" + timetype          
-    
-        print("Response:")
-        print(speech)
-
+            
+    elif action == "tell.minimumhours"
+        speech = "You should minimum 40 hours each week"
+        
         return {
             "speech": speech,
             "displayText": speech,
