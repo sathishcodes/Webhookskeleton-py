@@ -29,22 +29,31 @@ def webhook():
 
 def makeWebhookResult(req):
     action = req.get("result").get("action"); 
-     
-    if action == "tell.hours":
-        result = req.get("result")
-        parameters = result.get("parameters")
-
-        timetype = parameters.get("time-type")
-        portaltype = parameters.get("portal-types")
-
-        DteTime = {'CS':'9 hours', 'PTO':'8 hours'}
-        #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
+    
+    result = req.get("result")
+    parameters = result.get("parameters")
+    portaltype = parameters.get("portal-types")
+    
+    if portaltype is none:
+        portaltype = previousportal
+    
+    DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'Every Saturday'}
+    #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
+    
+    if action == "tell.hours":        
+        timetype = parameters.get("time-type")                
         
-        speech = "You should book" + str(DteTime[timetype]) + "for" + timetype          
+        speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
             
     elif action == "tell.minimumhours":
-        speech = "You should minimum 40 hours each week"
-        
+        speech = "You should minimum " + str(DteTime['Min']) + " each week"
+    
+    elif action == "tell.timeline":
+        speech = portaltype + " is due on " + str(DteTime['Due'])
+    
+    if portaltype is not none:
+        previousportal = portaltype            
+    
     return {
       "speech": speech,
       "displayText": speech,
