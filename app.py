@@ -45,14 +45,13 @@ def makeWebhookResult(req):
     elif action == "tell.minimumhours":
         speech = "You should minimum 40 hours each week"
         
-        return {
-            "speech": speech,
-            "displayText": speech,
-            #"data": {},
-            # "contextOut": [],
-            "source": "apiai-onlinestore-shipping"
-        }
-
+    return {
+      "speech": speech,
+      "displayText": speech,
+       #"data": {},
+       # "contextOut": [],
+       "source": "apiai-onlinestore-shipping"
+    }
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
