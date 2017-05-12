@@ -3,6 +3,10 @@
 import urllib
 import json
 import os
+import nltk.classify.util
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import names
+import pickle
 
 from flask import Flask
 from flask import request
@@ -44,7 +48,27 @@ def makeWebhookResult(req):
         timetype = parameters.get("time-type")                
         
         speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
-            
+        
+        f = open('my_classifier.pickle', 'rb')
+        classifier = pickle.load(f)
+        f.close()
+        
+        # Predict
+        neg = 0
+        pos = 0
+        sentence = "It is not good"
+        sentence = sentence.lower()
+        words = sentence.split(' ')
+        for word in words:
+            classResult = classifier.classify( word_feats(word))
+        if classResult == 'neg':
+            neg = neg + 1
+        if classResult == 'pos':
+            pos = pos + 1
+        
+        print('Positive: ' + str(float(pos)/len(words)))
+        print('Negative: ' + str(float(neg)/len(words)))
+
     elif action == "tell.minimumhours":
         speech = "You should minimum " + str(DteTime['Min']) + " each week"
     
