@@ -7,6 +7,7 @@ import nltk.classify.util
 from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import names
 import pickle
+import logging
 
 from flask import Flask
 from flask import request
@@ -14,7 +15,6 @@ from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
-
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -66,8 +66,8 @@ def makeWebhookResult(req):
         if classResult == 'pos':
             pos = pos + 1
         
-        print('Positive: ' + str(float(pos)/len(words)))
-        print('Negative: ' + str(float(neg)/len(words)))
+        logging.info('Positive: ' + str(float(pos)/len(words)))
+        logging.info('Negative: ' + str(float(neg)/len(words)))
 
     elif action == "tell.minimumhours":
         speech = "You should minimum " + str(DteTime['Min']) + " each week"
