@@ -34,7 +34,7 @@ def makeWebhookResult(req):
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
     
-    if portaltype is none:
+    if portaltype is None:
         portaltype = previousportal
     
     DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'Every Saturday'}
@@ -51,7 +51,7 @@ def makeWebhookResult(req):
     elif action == "tell.timeline":
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
-    if portaltype is not none:
+    if portaltype is not None:
         previousportal = portaltype            
     
     return {
