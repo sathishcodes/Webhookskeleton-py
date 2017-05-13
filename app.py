@@ -31,6 +31,9 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+def word_feats(words):
+    return dict([(word, True) for word in words])
+
 def makeWebhookResult(req):
     action = req.get("result").get("action"); 
     
