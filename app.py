@@ -57,14 +57,16 @@ def makeWebhookResult(req):
         neg = 0
         pos = 0
         sentence = "It is not good"
-        sentence = sentence.lower()
+        
+        sentence = sentence.lower()        
         words = sentence.split(' ')
+        
         for word in words:
             classResult = classifier.classify( word_feats(word))
-        if classResult == 'neg':
-            neg = neg + 1
-        if classResult == 'pos':
-            pos = pos + 1
+            if classResult == 'neg':
+                neg = neg + 1
+            if classResult == 'pos':
+                pos = pos + 1
         
         speech = " Negative = " + str(neg) + " Positive = " + str(pos)
         
