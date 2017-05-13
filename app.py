@@ -49,7 +49,7 @@ def makeWebhookResult(req):
         
         #speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
         
-        f = open('my_classifier.pickle', 'rb')
+        f = open('my_classifier1.pickle', 'rb')
         classifier = pickle.load(f)
         f.close()
         
