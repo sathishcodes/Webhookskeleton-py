@@ -58,7 +58,6 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "ask-feedback-custom":
-        
         f = open('my_classifier1.pickle', 'rb')
         
         classifier = pickle.load(f)
