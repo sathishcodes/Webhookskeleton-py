@@ -37,6 +37,8 @@ def word_feats(words):
 def makeWebhookResult(req):
     action = req.get("result").get("action"); 
     
+    feedback = req.get("resolvedQuery")
+    
     result = req.get("result")
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
@@ -56,7 +58,29 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "ask-feedback-custom":
-        speech = "Thanks for the feedback"
+        
+        f = open('my_classifier1.pickle', 'rb')
+        
+        classifier = pickle.load(f)
+        f.close()
+        
+        # Predict
+        neg = 0
+        pos = 0        
+        
+        sentence = feedback.lower()        
+        words = sentence.split(' ')
+        
+        for word in words:
+            classResult = classifier.classify( word_feats(word))
+            if classResult == 'neg':
+                neg = neg + 1
+            if classResult == 'pos':
+                pos = pos + 1
+                
+        speech = " Negative = " + str(neg) + " Positive = " + str(pos)        
+        
+        #speech = "Thanks for the feedback"
         
     return {
       "speech": speech,
