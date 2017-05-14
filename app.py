@@ -56,7 +56,7 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "get.feedback.ask-feedback-custom":            
-        feedback = req.get("agent");
+        feedback = result.get("resolvedQuery");
         
         fb_str = str(feedback)
         
