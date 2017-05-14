@@ -61,6 +61,9 @@ def makeWebhookResult(req):
     #if portaltype is not None:
     #    previousportal = portaltype            
     
+    elif action == "get.feeback"
+        speech = "Thanks for your feedback"
+        
     return {
       "speech": speech,
       "displayText": speech,       
