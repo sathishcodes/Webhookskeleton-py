@@ -50,32 +50,8 @@ def makeWebhookResult(req):
     if action == "tell.hours":        
         timetype = parameters.get("time-type")                
         
-        #speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
+        speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
         
-        f = open('my_classifier1.pickle', 'rb')
-        classifier = pickle.load(f)
-        f.close()
-        
-        # Predict
-        neg = 0
-        pos = 0
-        sentence = "It is not good"
-        
-        sentence = sentence.lower()        
-        words = sentence.split(' ')
-        
-        for word in words:
-            classResult = classifier.classify( word_feats(word))
-            if classResult == 'neg':
-                neg = neg + 1
-            if classResult == 'pos':
-                pos = pos + 1
-        
-        speech = " Negative = " + str(neg) + " Positive = " + str(pos)
-        
-        #logging.info('Positive: ' + str(float(pos)/len(words)))
-        #logging.info('Negative: ' + str(float(neg)/len(words)))
-
     elif action == "tell.minimumhours":
         speech = "You should minimum " + str(DteTime['Min']) + " each week"
     
