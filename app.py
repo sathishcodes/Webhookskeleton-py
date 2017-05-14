@@ -64,7 +64,7 @@ def makeWebhookResult(req):
         if  blob.sentiment.polarity > 0:
             speech = str(feedback) + str(blob.sentiment.polarity) + "Positive"
         else:
-            speech = "Negative"            
+            speech = str(feedback) + str(blob.sentiment.polarity) + "Negative"
         
     return {
       "speech": speech,
