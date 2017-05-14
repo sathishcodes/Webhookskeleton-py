@@ -59,12 +59,14 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "get.feedback.ask-feedback-custom":            
-        blob = TextBlob(str(feedback))                       
+        fb_str = str(feedback)
+        
+        blob = TextBlob(fb_str)                       
             
         if  blob.sentiment.polarity > 0:
             speech = str(feedback) + str(blob.sentiment.polarity) + "Positive"
         else:
-            speech = feedback + str(feedback) + str(blob.sentiment.polarity) + "Negative"
+            speech = fb_str + str(feedback) + str(blob.sentiment.polarity) + "Negative"
         
     return {
       "speech": speech,
