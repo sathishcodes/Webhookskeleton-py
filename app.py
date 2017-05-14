@@ -80,7 +80,7 @@ def makeWebhookResult(req):
                 
         speech = " Negative = " + str(neg) + " Positive = " + str(pos)        
         
-        #speech = "Thanks for the feedback"
+        #speech = "Thanks for the feedback".
         
     return {
       "speech": speech,
