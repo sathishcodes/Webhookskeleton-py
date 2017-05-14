@@ -59,7 +59,7 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "get.feedback.ask-feedback-custom":        
-        #speech = "Thanks for the feedback".
+        speech = "Thanks for the feedback".
         
     return {
       "speech": speech,
