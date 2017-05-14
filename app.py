@@ -41,8 +41,8 @@ def makeWebhookResult(req):
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
     
-    if portaltype is None:
-        portaltype = previousportal
+    #if portaltype is None:
+    #    portaltype = previousportal
     
     DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'Every Saturday'}
     #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
