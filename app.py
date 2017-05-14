@@ -66,6 +66,13 @@ def makeWebhookResult(req):
             speech = str(feedback) + str(blob.sentiment.polarity) + "Positive"
         else:
             speech = fb_str + str(feedback) + str(blob.sentiment.polarity) + "Negative"
+    
+    elif action == "get.feedback.ask-feedback-fallback":
+        
+        if result.get("contexts").get("name") == "ask-feedback-followup":
+            speech = "Thanks for feedback"
+        else:
+            speech = "Sorry, I didn't get that"
         
     return {
       "speech": speech,
