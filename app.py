@@ -58,28 +58,7 @@ def makeWebhookResult(req):
     elif action == "tell.timeline":
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
-    elif action == "get.feedback.ask-feedback-custom":
-        f = open('my_classifier1.pickle', 'rb')
-        
-        classifier = pickle.load(f)
-        f.close()
-        
-        # Predict
-        neg = 0
-        pos = 0        
-        
-        sentence = feedback.lower()        
-        words = sentence.split(' ')
-        
-        for word in words:
-            classResult = classifier.classify( word_feats(word))
-            if classResult == 'neg':
-                neg = neg + 1
-            if classResult == 'pos':
-                pos = pos + 1
-                
-        speech = " Negative = " + str(neg) + " Positive = " + str(pos)        
-        
+    elif action == "get.feedback.ask-feedback-custom":        
         #speech = "Thanks for the feedback".
         
     return {
