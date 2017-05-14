@@ -38,7 +38,7 @@ def word_feats(words):
 def makeWebhookResult(req):
     action = req.get("result").get("action"); 
     
-    feedback = req.get("resolvedQuery")
+    feedback = req.get("resolvedQuery");
     
     result = req.get("result")
     parameters = result.get("parameters")
@@ -64,7 +64,7 @@ def makeWebhookResult(req):
         if  blob.sentiment.polarity > 0:
             speech = str(feedback) + str(blob.sentiment.polarity) + "Positive"
         else:
-            speech = str(feedback) + str(blob.sentiment.polarity) + "Negative"
+            speech = feedback + str(feedback) + str(blob.sentiment.polarity) + "Negative"
         
     return {
       "speech": speech,
