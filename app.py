@@ -36,10 +36,7 @@ def word_feats(words):
     return dict([(word, True) for word in words])
 
 def makeWebhookResult(req):
-    action = req.get("result").get("action"); 
-    
-    feedback = req.get("resolvedQuery");
-    
+    action = req.get("result").get("action")
     result = req.get("result")
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
@@ -59,6 +56,8 @@ def makeWebhookResult(req):
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "get.feedback.ask-feedback-custom":            
+        feedback = req.get("resolvedQuery");
+        
         fb_str = str(feedback)
         
         blob = TextBlob(fb_str)                       
