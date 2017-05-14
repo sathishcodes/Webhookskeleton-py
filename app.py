@@ -61,7 +61,7 @@ def makeWebhookResult(req):
     elif action == "get.feedback.ask-feedback-custom":                        
         blob = TextBlob(feedback)                       
             
-        if  blob.sentiment.polarity < 0:
+        if  blob.sentiment.polarity > 0:
             speech "Positive"
         else:
             speech "Negative"            
