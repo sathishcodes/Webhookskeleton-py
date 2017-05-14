@@ -8,6 +8,7 @@ from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import names
 import pickle
 import logging
+from textblob import TextBlob
 
 from flask import Flask
 from flask import request
