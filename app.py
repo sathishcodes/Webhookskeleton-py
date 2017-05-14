@@ -58,8 +58,8 @@ def makeWebhookResult(req):
     elif action == "tell.timeline":
         speech = portaltype + " is due on " + str(DteTime['Due'])
     
-    elif action == "get.feedback.ask-feedback-custom":                        
-        blob = TextBlob(feedback)                       
+    elif action == "get.feedback.ask-feedback-custom":            
+        blob = TextBlob(str(feedback))                       
             
         if  blob.sentiment.polarity > 0:
             speech = "Positive"
