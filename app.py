@@ -23,8 +23,8 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 db = firebase.database();
-feedbackRef = db.child("feedbacks");
-
+feedbackRef = db.child("feedbacks")
+feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0})
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
