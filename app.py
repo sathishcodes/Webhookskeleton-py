@@ -3,6 +3,7 @@
 import urllib
 import json
 import os
+import pyrebase
 from textblob import TextBlob
 
 from flask import Flask
@@ -11,6 +12,19 @@ from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
+
+config = {
+  "apiKey": "AIzaSyDR_gxQXRxaGkM9YXEcFYy14mN_zh5HG4s",
+  "authDomain": "buddywiser-b7238.firebaseapp.com",
+  "databaseURL": "https://buddywiser-b7238.firebaseio.com",
+  "storageBucket": "buddywiser-b7238.appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+
+ db = firebase.database();
+ feedbackRef = db.child("feedbacks");
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
