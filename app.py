@@ -13,19 +13,19 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-config = {
-  "apiKey": "AIzaSyDR_gxQXRxaGkM9YXEcFYy14mN_zh5HG4s",
-  "authDomain": "buddywiser-b7238.firebaseapp.com",
-  "databaseURL": "https://buddywiser-b7238.firebaseio.com",
-  "storageBucket": "buddywiser-b7238.appspot.com"
-}
+# config = {
+#   "apiKey": "AIzaSyDR_gxQXRxaGkM9YXEcFYy14mN_zh5HG4s",
+#   "authDomain": "buddywiser-b7238.firebaseapp.com",
+#   "databaseURL": "https://buddywiser-b7238.firebaseio.com",
+#   "storageBucket": "buddywiser-b7238.appspot.com"
+# }
 
-firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
-user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
-db = firebase.database()
-feedbackRef = db.child("feedbacks")
-feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0},user["idToken"])
+# firebase = pyrebase.initialize_app(config)
+# auth = firebase.auth()
+# user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
+# db = firebase.database()
+# feedbackRef = db.child("feedbacks")
+# feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0},user["idToken"])
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -69,7 +69,7 @@ def makeWebhookResult(req):
         feedback = result.get("resolvedQuery");    
         fb_str = str(feedback)        
         blob = TextBlob(fb_str)                       
-        feedbackRef.child("dte").child("messages").push(feedback)
+        # feedbackRef.child("dte").child("messages").push(feedback)
         if  blob.sentiment.polarity > 0:
             speech = "Glad to hear that! Thanks for the feedback :) "
         else:
