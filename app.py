@@ -21,10 +21,11 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-
-db = firebase.database();
+auth = firebase.auth()
+user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
+db = firebase.database()
 feedbackRef = db.child("feedbacks")
-feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0})
+feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0},user["idToken"])
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
