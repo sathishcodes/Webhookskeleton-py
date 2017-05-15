@@ -22,8 +22,9 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 
- db = firebase.database();
- feedbackRef = db.child("feedbacks");
+db = firebase.database();
+feedbackRef = db.child("feedbacks");
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
