@@ -3,3 +3,4 @@ nltk
 textblob
 requests
 pyrebase
+firebase_admin
