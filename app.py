@@ -15,21 +15,21 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-# config = {
-#   "apiKey": "AIzaSyDR_gxQXRxaGkM9YXEcFYy14mN_zh5HG4s",
-#   "authDomain": "buddywiser-b7238.firebaseapp.com",
-#   "databaseURL": "https://buddywiser-b7238.firebaseio.com",
-#   "storageBucket": "buddywiser-b7238.appspot.com",
-#   "serviceAccount" : "buddywiser-b7238-firebase-adminsdk-p0m7z-d5ed363a78.json"
-# }
+config = {
+  "apiKey": "AIzaSyDR_gxQXRxaGkM9YXEcFYy14mN_zh5HG4s",
+  "authDomain": "buddywiser-b7238.firebaseapp.com",
+  "databaseURL": "https://buddywiser-b7238.firebaseio.com",
+  "storageBucket": "buddywiser-b7238.appspot.com",
+  "serviceAccount" : "buddywiser-b7238-firebase-adminsdk-p0m7z-d5ed363a78.json"
+}
 
-# firebase = pyrebase.initialize_app(config)
-# # auth = firebase.auth()
-# # user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
-# db = firebase.database()
-# feedbackRef = db.child("feedbacks")
-# # feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0},user["idToken"])
-# feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0})
+firebase = pyrebase.initialize_app(config)
+# auth = firebase.auth()
+# user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
+db = firebase.database()
+feedbackRef = db.child("feedbacks")
+# feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0},user["idToken"])
+feedbackRef.child("dte").set({"messages" : [], "positiveCount" : 0, "negetiveCount" : 0})
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
