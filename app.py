@@ -79,11 +79,11 @@ def makeWebhookResult(req):
         db.child("feedbacks").child("dte").child("messages").push(feedback)
         if  blob.sentiment.polarity > 0:
             speech = "Glad to hear that! Thanks for the feedback :) "
-            posCount = db.child("feedbacks").child("dte").child("positiveCount").val() + 1;
+            posCount = db.child("feedbacks").child("dte").child("positiveCount").get().val() + 1;
             db.child("feedbacks").child("dte").child("positiveCount").set(posCount)
         else:
             speech = "Sorry to hear that! Thanks for the feedback :) "
-            negCount = db.child("feedbacks").child("dte").child("negetiveCount").val() + 1;
+            negCount = db.child("feedbacks").child("dte").child("negetiveCount").get().val() + 1;
             db.child("feedbacks").child("dte").child("negetiveCount").set(negCount)
         
     return {
