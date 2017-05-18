@@ -27,12 +27,13 @@ firebase = pyrebase.initialize_app(config)
 # auth = firebase.auth()
 # user = auth.sign_in_with_email_and_password("buddydev101@gmail.com", "Analytics2017")
 db = firebase.database()
-feedbackRef = db.child("feedbacks")
+
 
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
+    feedbackRef = db.child("feedbacks")
 
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -78,9 +79,12 @@ def makeWebhookResult(req):
         feedbackRef.child("dte").child("messages").push(feedback)
         if  blob.sentiment.polarity > 0:
             speech = "Glad to hear that! Thanks for the feedback :) "
-            feedbackRef.child("dte").child("negetiveCount")
+            posCount = feedbackRef.child("dte").child("positiveCount").get() + 1;
+            feedbackRef.child("dte").child("positiveCount").set(posCount)
         else:
             speech = "Sorry to hear that! Thanks for the feedback :) "
+            negCount = feedbackRef.child("dte").child("negetiveCount").get() + 1;
+            feedbackRef.child("dte").child("negetiveCount").set(negCount)
         
     return {
       "speech": speech,
