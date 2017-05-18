@@ -68,7 +68,7 @@ def makeWebhookResult(req):
     
     elif action == "tell.timeline":
         if portaltype == "Check-ins":
-          speech = portaltype + "should be done bi-weekly".
+          speech = portaltype + "should be done bi-weekly"
         else:
           speech = portaltype + " is due on " + str(DteTime['Due'])
     
