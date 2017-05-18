@@ -67,7 +67,10 @@ def makeWebhookResult(req):
         speech = "You should minimum " + str(DteTime['Min']) + " each week"
     
     elif action == "tell.timeline":
-        speech = portaltype + " is due on " + str(DteTime['Due'])
+        if portaltype = "Check-ins":
+          speech = portaltype + "should be done bi-weekly".
+        else:
+          speech = portaltype + " is due on " + str(DteTime['Due'])
     
     elif action == "get.feedback.ask-feedback-custom":            
         feedback = result.get("resolvedQuery");    
