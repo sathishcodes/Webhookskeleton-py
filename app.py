@@ -85,10 +85,10 @@ def makeWebhookResult(req):
             speech = "Sorry to hear that! Thanks for the feedback :) "
             negCount = db.child("feedbacks").child("dte").child("negetiveCount").get().val() + 1;
             db.child("feedbacks").child("dte").child("negetiveCount").set(negCount)
-        
+            
     return {
       "speech": speech,
-      "displayText": speech,       
+      "displayText": speech,             
        # "contextOut": [],
        "source": " "
     }
