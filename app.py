@@ -60,7 +60,7 @@ def makeWebhookResult(req):
     
     if db.child("feedbacks").child("feedbackTriggered").get().val() == 1: # if feedback intent has been triggered previously 
                                                                           # then treat the incoming intest as feedback
-       feedback = result.get("resolvedQuery");    
+        feedback = result.get("resolvedQuery");    
         fb_str = str(feedback)        
         blob = TextBlob(fb_str)                       
         db.child("feedbacks").child("dte").child("messages").push(feedback)
