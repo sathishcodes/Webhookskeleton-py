@@ -111,10 +111,12 @@ def makeWebhookResult(req):
 
         db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
 
+    elif action == "input.unknown"
+         db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
+        
     elif action == "get.feedback":
           db.child("feedbacks").child("feedbackTriggered").set(1) # set the feedback flag
-
-            
+                    
     return {
       "speech": speech,
       "displayText": speech,             
