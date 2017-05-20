@@ -58,19 +58,42 @@ def makeWebhookResult(req):
     DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'Every Saturday'}
     #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
     
-    if action == "tell.hours":        
+    if db.child("feedbacks").child("feedbackTriggered").get().val() == 1: # if feedback intent has been triggered previously 
+                                                                          # then treat the incoming intest as feedback
+       feedback = result.get("resolvedQuery");    
+        fb_str = str(feedback)        
+        blob = TextBlob(fb_str)                       
+        db.child("feedbacks").child("dte").child("messages").push(feedback)
+        if  blob.sentiment.polarity > 0:
+            speech = "Glad to hear that! Thanks for the feedback :) "
+            posCount = db.child("feedbacks").child("dte").child("positiveCount").get().val() + 1;
+            db.child("feedbacks").child("dte").child("positiveCount").set(posCount)
+        else:
+            speech = "Sorry to hear that! Thanks for the feedback :) "
+            negCount = db.child("feedbacks").child("dte").child("negetiveCount").get().val() + 1;
+            db.child("feedbacks").child("dte").child("negetiveCount").set(negCount)
+
+        db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
+
+    elif action == "tell.hours":        
         timetype = parameters.get("time-type")                
         
         speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
+
+        db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
         
     elif action == "tell.minimumhours":
         speech = "You should minimum " + str(DteTime['Min']) + " each week"
+
+        db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
     
     elif action == "tell.timeline":
         if portaltype == "Check-ins":
           speech = portaltype + "should be done bi-weekly"
         else:
           speech = portaltype + " is due on " + str(DteTime['Due'])
+
+        db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
     
     elif action == "get.feedback.ask-feedback-custom":            
         feedback = result.get("resolvedQuery");    
@@ -85,6 +108,12 @@ def makeWebhookResult(req):
             speech = "Sorry to hear that! Thanks for the feedback :) "
             negCount = db.child("feedbacks").child("dte").child("negetiveCount").get().val() + 1;
             db.child("feedbacks").child("dte").child("negetiveCount").set(negCount)
+
+        db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
+
+    elif action == "get.feedback":
+          db.child("feedbacks").child("feedbackTriggered").set(1) # set the feedback flag
+
             
     return {
       "speech": speech,
