@@ -60,7 +60,16 @@ def makeWebhookResult(req):
     
     if db.child("feedbacks").child("feedbackTriggered").get().val() == 1: # if feedback intent has been triggered previously 
                                                                           # then treat the incoming intest as feedback
-        fPortal = "dte"
+        
+        feedbackId = db.child("feedbacks").child("feedbackId").get().val()
+
+    # Setting the portal for which feedback was provided
+        if feedbackId == 1:
+          fPortal = "dte"
+        elif feedbackId == 2:
+          fPortal = "staffit"
+        elif feedbackId == 3:
+          fPortal == "RPM"
 
         feedback = result.get("resolvedQuery");    
         fb_str = str(feedback)        
@@ -118,6 +127,17 @@ def makeWebhookResult(req):
         
     elif action == "get.feedback":
           db.child("feedbacks").child("feedbackTriggered").set(1) # set the feedback flag
+
+          # Getting the question which was asked by the bot
+          speechBot = result.get("fulfillment").get("speech")
+
+          if "time" in speechBot:
+            db.child("feedbacks").child("feedbackId").set(1) # set the feedback id for DTE
+          elif "schedule" in speechBot:
+            db.child("feedbacks").child("feedbackId").set(2) # set the feedback flag for Staffit
+          elif "performance" in speechBot:
+            db.child("feedbacks").child("feedbackId").set(3) # set the feedback flag for RPM
+
                     
     return {
       "speech": speech,
