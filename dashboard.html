@@ -1,33 +1,10 @@
 <html>
-    
-    <head>
-        <style>            
-            h1   {color: #f1c40f; font-family: sans-serif; text-align: center}
-            p    {color: red;}
-            #canvas-container {
-                width: 100%;
-                text-align:left;
-            }
-            canvas {
-                display: inline;
-            }
-        </style>
-        
-        <div id="canvas-containter">
-        <h1>Feedback</h1>    
-        <canvas id="myChart" width="100" height="40"></canvas>    
-        </div>    
-    </head>    
-
-    
-<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase-database.js"></script>    
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase-database.js"></script>        
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-    
+
 <script>
   // Initialize Firebase
   var config = {
@@ -47,7 +24,8 @@
     console.log(error.code);
     console.log(error.message);
   });
-    
+
+// DTE Chart    
   var ref = firebase.database().ref('/feedbacks/dte/');
     
   ref.once('value')
@@ -57,36 +35,112 @@
   
   var negativecount = snapshot.val().negetiveCount;       
 
-  var ctx = document.getElementById("myChart").getContext('2d');
-  //ctx.canvas.width = 50px;
- // ctx.canvas.height = 30px;
-  ctx.font = "30px Arial";
-  ctx.fillText("Hello World",10,50);      
-  var myChart = new Chart(ctx, {
+  var ctx = document.getElementById("dteChart").getContext('2d');
+
+  var dteChart = new Chart(ctx, {
+  type: 'doughnut',
+  //options: {
+//        animation:{
+  //          animateScale:true,
+//            animateScale:true
+  //      }
+//    },
+  data: {
+    labels: ["Positive Feedback", "Negative Feedback"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#e74c3c",
+      ],
+      //hoverBackgroundColor: [
+      //            "#FF6384",
+      //            "#36A2EB",
+     //            "#FFCE56"
+     //        ],    
+      data: [positivecount, negativecount]
+    }]
+  }     
+});
+});
+
+// STAFFIT Chart    
+  var staffitRef = firebase.database().ref('/feedbacks/staffit/');
+    
+  staffitRef.once('value')
+    .then(function(snapshot){
+      
+  var staffitPositivecount = snapshot.val().positiveCount; 
+  
+  var staffitNegativecount = snapshot.val().negetiveCount;       
+
+  var staffitCtx = document.getElementById("staffitChart").getContext('2d');
+
+  var staffitChart = new Chart(staffitCtx, {
   type: 'doughnut',
   data: {
     labels: ["Positive Feedback", "Negative Feedback"],
     datasets: [{
       backgroundColor: [
         "#2ecc71",
-        "#3498db",
-  //      "#95a5a6",
-    //    "#9b59b6",
-      //  "#f1c40f",
-    //    "#e74c3c",
-    //    "#34495e" 
+        "#e74c3c",
       ],
-      data: [positivecount, negativecount]
+      data: [staffitPositivecount, staffitNegativecount]
     }]
   }     
 });
-      
-      
-  });            
-  
-//  var ref = firebase.database().ref('/feedbacks/dte/positiveCount').v
-  
-  //  console.log(ref);
-</script>    
+});
+   
+// RPM Chart    
+  var rpmRef = firebase.database().ref('/feedbacks/rpm/');
     
+  rpmRef.once('value')
+    .then(function(snapshot){
+      
+  var rpmPositivecount = snapshot.val().positiveCount; 
+  
+  var rpmNegativecount = snapshot.val().negetiveCount;       
+
+  var rpmCtx = document.getElementById("rpmChart").getContext('2d');
+
+  var rpmChart = new Chart(rpmCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Positive Feedback", "Negative Feedback"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#e74c3c",
+      ],
+      data: [rpmPositivecount, rpmNegativecount]
+    }]
+  }     
+});
+});    
+</script>    
+    <head>
+        <style>            
+            h1   {color: #f1c40f; font-family: sans-serif; text-align: center}
+            p    {color: red;}
+            #canvas-container {
+                width: 100%;
+                text-align:left;
+            }
+            canvas {
+                display: inline;
+            }
+        </style>
+        <title>Feedback Dashboard</title>        
+        <div align = "left">
+        <h1>Time Booking process - Feedback</h1>    
+        <canvas id="dteChart" width="30" height="10"></canvas>    
+        </div>    
+        <div id="canvas-containter">
+        <h1>Schedule Confirmation process - Feedback</h1>    
+        <canvas id="staffitChart" width="30" height="10"></canvas>    
+        </div>    
+        <div id="canvas-containter">
+        <h1>Performance Management process - Feedback</h1>    
+        <canvas id="rpmChart" width="30" height="10"></canvas>    
+        </div>    
+    </head>                
 </html>
