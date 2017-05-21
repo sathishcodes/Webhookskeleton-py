@@ -69,7 +69,7 @@ def makeWebhookResult(req):
         elif feedbackId == 2:
           fPortal = "staffit"
         elif feedbackId == 3:
-          fPortal == "RPM"
+          fPortal == "rpm"
 
         feedback = result.get("resolvedQuery");    
         fb_str = str(feedback)        
