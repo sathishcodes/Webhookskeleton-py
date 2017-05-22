@@ -141,12 +141,12 @@ def makeWebhookResult(req):
           elif "performance" in speechBot:
             db.child("feedbacks").child("feedbackId").set(3) # set the feedback flag for RPM
 
-     elif action == "tell.project":
+    elif action == "tell.project":
           # Code to read project and insert resource
 
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
 
-     elif action == "tell.resource":
+    elif action == "tell.resource":
           # Code to read resource and  to insert project
 
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
