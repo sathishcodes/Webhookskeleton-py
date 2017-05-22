@@ -145,12 +145,17 @@ def makeWebhookResult(req):
 
     elif action == "tell.project":
           # Code to read project and insert resource
+          # db.child("skills").child("ABAP").child("projects")
+          
+          jobrole = parameters.get("job-role") # job role parameter
 
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
 
     elif action == "tell.resource":
           # Code to read resource and  to insert project
 
+          projectname = parameters.get("project") # project name
+            
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
                             
     return {
