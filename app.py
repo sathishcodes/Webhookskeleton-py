@@ -55,8 +55,8 @@ def makeWebhookResult(req):
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
     
-    DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'Every Saturday'}
-    #StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
+    DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'every Saturday'}
+    StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
     
     if db.child("feedbacks").child("feedbackTriggered").get().val() == 1: # if feedback intent has been triggered previously 
                                                                           # then treat the incoming intest as feedback
@@ -88,9 +88,12 @@ def makeWebhookResult(req):
 
     elif action == "tell.hours":        
         timetype = parameters.get("time-type")                
-        
-        speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
 
+        if portaltype == "DTE":
+          speech = "You should book " + str(DteTime[timetype]) + " for " + timetype          
+        elif portaltype == "STAFFIT":
+          speech = "You should book " + str(StaffitTime[timetype]) + " for " + timetype                       
+                
         db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag
         
     elif action == "tell.minimumhours":
@@ -100,7 +103,7 @@ def makeWebhookResult(req):
     
     elif action == "tell.timeline":
         if portaltype == "Check-ins":
-          speech = portaltype + "should be done bi-weekly"
+          speech = portaltype + " should be done bi-weekly"
         else:
           speech = portaltype + " is due on " + str(DteTime['Due'])
 
@@ -138,7 +141,16 @@ def makeWebhookResult(req):
           elif "performance" in speechBot:
             db.child("feedbacks").child("feedbackId").set(3) # set the feedback flag for RPM
 
-                    
+     elif action == "tell.project":
+          # Code to read project and insert resource
+
+          db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
+
+     elif action == "tell.resource":
+          # Code to read resource and  to insert project
+
+          db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
+                            
     return {
       "speech": speech,
       "displayText": speech,             
