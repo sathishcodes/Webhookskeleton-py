@@ -54,8 +54,6 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
-
-    username = req.get(originalRequest).get(data).get(address).get(user).get(name)   # get the user name from skype
     
     DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'every Saturday'}
     StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
@@ -149,13 +147,19 @@ def makeWebhookResult(req):
           
           jobrole = parameters.get("job-role") # job role parameter
 
+          # this will give error when not called from skype   
+          username = req.get(originalRequest).get(data).get(address).get(user).get(name)   # get the user name from skype
+
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
 
     elif action == "tell.resource":
           # Code to read resource and  to insert project
 
           projectname = parameters.get("project") # project name
-            
+          
+          # this will give error when not called from skype 
+          username = req.get(originalRequest).get(data).get(address).get(user).get(name)   # get the user name from skype, 
+
           db.child("feedbacks").child("feedbackTriggered").set(0) # reset the feedback flag        
                             
     return {
