@@ -142,7 +142,7 @@ def makeWebhookResult(req):
             db.child("feedbacks").child("feedbackId").set(3) # set the feedback flag for RPM
 
     elif action == "tell.project":
-          # Code to read project and insert resource
+          # Code to read project and insert resource  
           # db.child("skills").child("ABAP").child("projects")
           
           jobrole = parameters.get("job-role") # job role parameter
