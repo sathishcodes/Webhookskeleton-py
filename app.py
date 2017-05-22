@@ -54,6 +54,8 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     portaltype = parameters.get("portal-types")
+
+    username = req.get(originalRequest).get(data).get(address).get(user).get(name)   # get the user name from skype
     
     DteTime = {'CS':'9 hours', 'PTO':'8 hours', 'Min': '40 hours', 'Due': 'every Saturday'}
     StaffitTime = {'CS':'8 hours', 'PTO':'8 hours'}
