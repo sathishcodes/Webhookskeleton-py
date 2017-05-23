@@ -132,7 +132,8 @@ def makeWebhookResult(req):
           db.child("feedbacks").child("feedbackTriggered").set(1) # set the feedback flag
 
           # Getting the question which was asked by the bot
-          speechBot = result.get("fulfillment").get("speech")
+          # speechBot = result.get("fulfillment").get("speech")
+          speechBot = result.get("fulfillment").get("messages")[0].get("speech")
 
           if "time" in speechBot:
             db.child("feedbacks").child("feedbackId").set(1) # set the feedback id for DTE
